@@ -2,6 +2,7 @@ package fr.zbar.kata.marsrover.position;
 
 import fr.zbar.kata.marsrover.Direction;
 import fr.zbar.kata.marsrover.Grid;
+import fr.zbar.kata.marsrover.ObstacleException;
 import fr.zbar.kata.marsrover.Point;
 
 import java.util.function.Function;
@@ -19,7 +20,11 @@ public sealed interface Position
     }
 
     private Position move(Grid grid) {
-        return new OpenPosition(direction().move(grid, point()), direction());
+        Point nextPoint = direction().move(grid, point());
+        if (grid.isObstacle(nextPoint)) {
+            throw new ObstacleException(new ObstaclePosition(point(), direction()));
+        }
+        return new OpenPosition(nextPoint, direction());
     }
 
     class PositionFunction implements Function<String, Position> {
