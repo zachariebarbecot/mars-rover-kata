@@ -8,7 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class MarsRoverTest {
 
-    private final MarsRover rover = new MarsRover();
+    private final Grid grid = new Grid(5, 5);
+    private final MarsRover rover = new MarsRover(grid);
 
     @ParameterizedTest
     @CsvSource({

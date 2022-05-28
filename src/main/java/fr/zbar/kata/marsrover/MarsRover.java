@@ -4,9 +4,11 @@ import fr.zbar.kata.marsrover.Position.PositionFunction;
 
 public final class MarsRover {
 
+    private final Grid grid;
     private final Position position;
 
-    public MarsRover() {
+    public MarsRover(Grid grid) {
+        this.grid = grid;
         this.position = Position.INIT;
     }
 
