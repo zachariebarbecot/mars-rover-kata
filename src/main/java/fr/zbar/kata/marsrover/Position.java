@@ -9,23 +9,25 @@ public record Position(Point point, Direction direction) {
         return new Position(point, direction.rotate(cmd));
     }
 
-    private Position move() {
-        return new Position(direction.move(point), direction);
+    private Position move(Grid grid) {
+        return new Position(direction.move(grid,point), direction);
     }
 
     public static class PositionFunction implements Function<String, Position> {
 
 
+        private final Grid grid;
         private Position position;
 
-        public PositionFunction(Position position) {
+        public PositionFunction(Grid grid, Position position) {
+            this.grid = grid;
             this.position = position;
         }
 
         @Override
         public Position apply(String cmd) {
             if ("M".equals(cmd)) {
-                position = position.move();
+                position = position.move(grid);
                 return position;
             }
             position = position.rotate(cmd);

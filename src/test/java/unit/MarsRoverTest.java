@@ -49,12 +49,28 @@ class MarsRoverTest {
             "MM,0,2,N",
             "RM,1,0,E",
             "RMM,2,0,E",
-            "LM,-1,0,W",
-            "LMM,-2,0,W",
-            "LLM,0,-1,S",
-            "LLMM,0,-2,S"
+            "LM,4,0,W",
+            "LMM,3,0,W",
+            "LLM,0,4,S",
+            "LLMM,0,3,S"
     })
     void should_move(String stringCommand, Integer expectedX, Integer expectedY, String expectedDirection) {
+        Command command = new Command(stringCommand);
+
+        Position result = rover.execute(command);
+
+        Position expected = new Position(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
+        assertThat(result).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "MMMMM,0,0,N",
+            "RMMMMM,0,0,E",
+            "LM,4,0,W",
+            "LLM,0,4,S",
+    })
+    void should_wrap_around(String stringCommand, Integer expectedX, Integer expectedY, String expectedDirection) {
         Command command = new Command(stringCommand);
 
         Position result = rover.execute(command);

@@ -13,7 +13,7 @@ public final class MarsRover {
     }
 
     public Position execute(Command command) {
-        PositionFunction function = new PositionFunction(position);
+        PositionFunction function = new PositionFunction(grid, position);
         return command.stream()
                 .map(function)
                 .reduce(Position.INIT, (f, s) -> s);

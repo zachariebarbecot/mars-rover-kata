@@ -20,7 +20,10 @@ public enum Direction {
         }
 
         @Override
-        Point moveTo(Point point) {
+        Point moveTo(Grid grid, Point point) {
+            if (point.isXEqual(0)) {
+                return new Point(grid.maxX() - 1, point.y());
+            }
             return new Point(point.x() - 1, point.y());
         }
     },
@@ -36,7 +39,10 @@ public enum Direction {
         }
 
         @Override
-        Point moveTo(Point point) {
+        Point moveTo(Grid grid, Point point) {
+            if (point.isYEqual(grid.maxY() - 1)) {
+                return new Point(point.x(), 0);
+            }
             return new Point(point.x(), point.y() + 1);
         }
     },
@@ -52,7 +58,10 @@ public enum Direction {
         }
 
         @Override
-        Point moveTo(Point point) {
+        Point moveTo(Grid grid, Point point) {
+            if (point.isYEqual(0)) {
+                return new Point(point.x(), grid.maxY() - 1);
+            }
             return new Point(point.x(), point.y() - 1);
         }
     },
@@ -68,7 +77,10 @@ public enum Direction {
         }
 
         @Override
-        Point moveTo(Point point) {
+        Point moveTo(Grid grid, Point point) {
+            if (point.isXEqual(grid.maxX() - 1)) {
+                return new Point(0, point.y());
+            }
             return new Point(point.x() + 1, point.y());
         }
     };
@@ -94,15 +106,15 @@ public enum Direction {
         return this;
     }
 
-    public Point move(Point point) {
-        return moveTo(point);
+    public Point move(Grid grid, Point point) {
+        return moveTo(grid, point);
     }
 
     abstract Direction left();
 
     abstract Direction right();
 
-    abstract Point moveTo(Point point);
+    abstract Point moveTo(Grid grid, Point point);
 
     public String value() {
         return value;
