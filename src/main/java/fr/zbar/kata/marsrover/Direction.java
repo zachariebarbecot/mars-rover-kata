@@ -18,6 +18,11 @@ public enum Direction {
         protected Direction right() {
             return NORTH;
         }
+
+        @Override
+        Point moveTo(Point point) {
+            return new Point(point.x() - 1, point.y());
+        }
     },
     NORTH("N") {
         @Override
@@ -28,6 +33,11 @@ public enum Direction {
         @Override
         protected Direction right() {
             return EAST;
+        }
+
+        @Override
+        Point moveTo(Point point) {
+            return new Point(point.x(), point.y() + 1);
         }
     },
     SOUTH("S") {
@@ -40,6 +50,11 @@ public enum Direction {
         protected Direction right() {
             return WEST;
         }
+
+        @Override
+        Point moveTo(Point point) {
+            return new Point(point.x(), point.y() - 1);
+        }
     },
     EAST("E") {
         @Override
@@ -50,6 +65,11 @@ public enum Direction {
         @Override
         protected Direction right() {
             return SOUTH;
+        }
+
+        @Override
+        Point moveTo(Point point) {
+            return new Point(point.x() + 1, point.y());
         }
     };
 
@@ -74,9 +94,15 @@ public enum Direction {
         return this;
     }
 
+    public Point move(Point point) {
+        return moveTo(point);
+    }
+
     abstract Direction left();
 
     abstract Direction right();
+
+    abstract Point moveTo(Point point);
 
     public String value() {
         return value;
