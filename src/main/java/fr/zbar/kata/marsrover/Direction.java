@@ -116,7 +116,7 @@ public enum Direction {
 
     abstract Point moveTo(Grid grid, Point point);
 
-    public String value() {
+    private String value() {
         return value;
     }
 }

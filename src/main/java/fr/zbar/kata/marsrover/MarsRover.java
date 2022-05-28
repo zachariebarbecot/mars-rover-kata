@@ -1,6 +1,7 @@
 package fr.zbar.kata.marsrover;
 
-import fr.zbar.kata.marsrover.Position.PositionFunction;
+import fr.zbar.kata.marsrover.position.Position;
+import fr.zbar.kata.marsrover.position.Position.PositionFunction;
 
 public final class MarsRover {
 

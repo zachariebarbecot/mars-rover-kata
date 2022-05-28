@@ -1,20 +1,28 @@
-package fr.zbar.kata.marsrover;
+package fr.zbar.kata.marsrover.position;
+
+import fr.zbar.kata.marsrover.Direction;
+import fr.zbar.kata.marsrover.Grid;
+import fr.zbar.kata.marsrover.Point;
 
 import java.util.function.Function;
 
-public record Position(Point point, Direction direction) {
-    public static final Position INIT = new Position(Point.INIT, Direction.NORTH);
+public sealed interface Position
+        permits ObstaclePosition, OpenPosition {
+    Position INIT = new OpenPosition(Point.INIT, Direction.NORTH);
+
+    Point point();
+
+    Direction direction();
 
     private Position rotate(String cmd) {
-        return new Position(point, direction.rotate(cmd));
+        return new OpenPosition(point(), direction().rotate(cmd));
     }
 
     private Position move(Grid grid) {
-        return new Position(direction.move(grid,point), direction);
+        return new OpenPosition(direction().move(grid, point()), direction());
     }
 
-    public static class PositionFunction implements Function<String, Position> {
-
+    class PositionFunction implements Function<String, Position> {
 
         private final Grid grid;
         private Position position;

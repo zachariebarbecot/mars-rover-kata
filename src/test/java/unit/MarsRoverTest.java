@@ -1,6 +1,10 @@
 package unit;
 
 import fr.zbar.kata.marsrover.*;
+import fr.zbar.kata.marsrover.Direction;
+import fr.zbar.kata.marsrover.position.OpenPosition;
+import fr.zbar.kata.marsrover.Point;
+import fr.zbar.kata.marsrover.position.Position;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -23,7 +27,7 @@ class MarsRoverTest {
 
         Position result = rover.execute(command);
 
-        Position expected = new Position(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
+        Position expected = new OpenPosition(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
         assertThat(result).isEqualTo(expected);
     }
 
@@ -39,7 +43,7 @@ class MarsRoverTest {
 
         Position result = rover.execute(command);
 
-        Position expected = new Position(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
+        Position expected = new OpenPosition(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
         assertThat(result).isEqualTo(expected);
     }
 
@@ -59,7 +63,7 @@ class MarsRoverTest {
 
         Position result = rover.execute(command);
 
-        Position expected = new Position(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
+        Position expected = new OpenPosition(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
         assertThat(result).isEqualTo(expected);
     }
 
@@ -75,7 +79,7 @@ class MarsRoverTest {
 
         Position result = rover.execute(command);
 
-        Position expected = new Position(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
+        Position expected = new OpenPosition(new Point(expectedX, expectedY), Direction.asMapByValue().get(expectedDirection));
         assertThat(result).isEqualTo(expected);
     }
 }
